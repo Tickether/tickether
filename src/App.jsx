@@ -11,7 +11,7 @@ import Account from "components/Account";
 import Chains from "components/Chains";
 import NFTBalance from "components/NFTBalance";
 import NFTTokenIds from "components/NFTTokenIds";
-import {Menu, Layout} from "antd";
+import {Menu, Layout, Breadcrumb} from "antd";
 import SearchCollections from "components/SearchCollections";
 import "antd/dist/antd.css";
 import NativeBalance from "components/NativeBalance";
@@ -19,8 +19,9 @@ import "./style.css";
 import Text from "antd/lib/typography/Text";
 import NFTMarketTransactions from "components/NFTMarketTransactions";
 import Home from "./components/Home";
-import { Drawer, Button } from 'antd';
+import {Col, Row, Drawer, Button,Input} from 'antd';
 import RightMenu from "./components/Navigation/RightMenu";
+import { ArrowRightOutlined } from '@ant-design/icons';
 import EventDetails from "./components/Event-Details";
 import Afrochella from "components/Afrochella2022";
 import BurningMan from "components/BurningMan2022";
@@ -29,7 +30,7 @@ import Felabration from "components/Felabration2022";
 import Lollapalooza from "components/Lollapalooza2022";
 import SXSW from "components/SXSW2022";
 
-const {Header} = Layout;
+const {Header, Content, Sider, Footer} = Layout;
 
 const styles = {
     content: {
@@ -39,6 +40,11 @@ const styles = {
         color: "#041836",
         marginTop: "130px",
         padding: "10px",
+    },
+    subLinks:{
+        color: '#777e90',
+        fontSize: '12px',
+        fontWeight: '500'
     },
     header: {
         position: "fixed",
@@ -61,15 +67,16 @@ const styles = {
         fontWeight: "600",
     },
 };
+const { Search } = Input;
 const App = ({isServerInfo}) => {
     const {isWeb3Enabled, enableWeb3, isAuthenticated, isWeb3EnableLoading} =
         useMoralis();
 
-    const [accounts, setAccounts] = useState ([]);
-
+    const [accounts, setAccounts] = useState([]);
 
 
     const [inputValue, setInputValue] = useState("explore");
+    const onSearch = (value) => console.log(value);
 
     useEffect(() => {
         if (isAuthenticated && !isWeb3Enabled && !isWeb3EnableLoading) enableWeb3();
@@ -77,10 +84,128 @@ const App = ({isServerInfo}) => {
     }, [isAuthenticated, isWeb3Enabled]);
 
 
-
     return (
         <>
             <Router>
+                <Layout className="layout" style={{background: '#fcfcfd'}}>
+                    <nav className="menuBar container" style={{marginTop: '30px'}}>
+                        <div className="logo">
+                            <NavLink to="/home">
+                                <img
+                                    src='https://gateway.pinata.cloud/ipfs/Qmeq9SXKLDnpQDXtyco36Jr6jMSAFj8PBpYBUwJprLtmvt'
+                                    alt="logo"/>
+                            </NavLink>
+                        </div>
+                        <div className="menuCon">
+                            <div className="rightMenu" style={styles.headerRight}>
+                                <NavLink to="/nftBalance">
+                                    COLLECTIONS
+                                </NavLink>
+                                <NavLink to="/Transactions">
+                                    TRANSACTIONS
+                                </NavLink>
+                                <NavLink to="/NFTMarketPlace">
+                                    EXPLORE
+                                </NavLink>
+
+                                <Chains/>
+                                <NativeBalance/>
+                                <Account/>
+                                {/*<Button style={{*/}
+                                {/*    background: "#000",*/}
+                                {/*    color: "white",*/}
+                                {/*    fontSize: '12px',*/}
+                                {/*    height: '45px',*/}
+                                {/*    borderRadius: '4px',*/}
+                                {/*    boxShadow: '0 2px 3px 0 #ccc'*/}
+                                {/*}}>CREATE YOUR OWN EVENT</Button>*/}
+                            </div>
+                            <Button className="barsMenu" type="primary">
+                                <span className="barsBtn"></span>
+                            </Button>
+                        </div>
+                    </nav>
+                    <div>
+                        <div className="main">
+                            <Switch>
+                                <Route path="/">
+                                    <Home/>
+                                </Route>
+                                <Route path="/event-details">
+                                    <EventDetails/>
+                                </Route>
+                                <Route path="/afrochella2022">
+                                    <Afrochella/>
+                                </Route>
+                                <Route path="/burningman2022">
+                                    <BurningMan/>
+                                </Route>
+                                <Route path="/coachella2022">
+                                    <Coachella/>
+                                </Route>
+                                <Route path="/felabration2022">
+                                    <Felabration/>
+                                </Route>
+                                <Route path="/lollapalooza2022">
+                                    <Lollapalooza/>
+                                </Route>
+                                <Route path="/sxsw2022">
+                                    <SXSW/>
+                                </Route>
+                                <Route path="/nftBalance">
+                                    <NFTBalance/>
+                                </Route>
+
+                                <Route path="/NFTMarketPlace">
+                                    <NFTTokenIds inputValue={inputValue} setInputValue={setInputValue}/>
+                                </Route>
+                                <Route path="/Transactions">
+                                    <NFTMarketTransactions/>
+                                </Route>
+                            </Switch>
+                        </div>
+
+                    </div>
+
+                    <div style={{borderTop: '1px solid #e6e8ec'}}>
+                        <div className="container">
+                            <Row gutter={18} style={{padding: '80px 0 48px', borderBottom: '1px solid #e6e8ec'}}>
+                                <Col xs={24} xl={9}>
+                                    <img
+                                        src='https://gateway.pinata.cloud/ipfs/Qmeq9SXKLDnpQDXtyco36Jr6jMSAFj8PBpYBUwJprLtmvt'
+                                        alt="logo"/>
+                                </Col>
+                                <Col xs={12} xl={5} className="mt-4 mt-md-0">
+                                    <h6>Connect</h6>
+                                    <div className="mt-3" style={styles.subLinks}>Twitter</div>
+                                    <div className="mt-3" style={styles.subLinks}>Contact</div>
+                                </Col>
+                                <Col xs={12} xl={5} className="mt-4 mt-md-0">
+                                    <h6>Info</h6>
+                                    <div className="mt-3" style={styles.subLinks}>Guides</div>
+                                    <div className="mt-3" style={styles.subLinks}>FAQ</div>
+                                </Col>
+
+                                <Col xs={24} xl={5} className="mt-4 mt-md-0">
+                                    <h6>Join Newsletter</h6>
+                                    <div className="mt-2 mb-2" style={styles.subLinks}>Get notified about Tickether 🥳</div>
+                                    <div>
+                                        <input className="searchInput" type="text" name="email" placeholder="Enter your email" required="" value="" />
+                                        <Button type="primary" className="searchBtn" shape="circle" icon={<ArrowRightOutlined />} />
+                                    </div>
+
+                                </Col>
+                            </Row>
+                            <Row gutter={18} style={{padding: '32px 0'}}>
+                                <Col xs={24}>
+                                    <div style={{fontSize: '12px',color: '#777e90'}}>Copyright © 2022 Tickether. All rights reserved
+                                    </div>
+                                </Col>
+
+                            </Row>
+                        </div>
+                    </div>
+                </Layout>
                 {/*<Header style={styles.header}>*/}
                 {/*    <Logo/>*/}
                 {/*    <SearchCollections setInputValue={setInputValue}/>*/}
@@ -115,78 +240,9 @@ const App = ({isServerInfo}) => {
                 {/*        <Account/>*/}
                 {/*    </div>*/}
                 {/*</Header>*/}
-                <nav className="menuBar container" style={{marginTop:'30px',marginBottom:'70px'}}>
-                    <div className="logo">
-                        <NavLink to="/home">
-                            <img src='https://gateway.pinata.cloud/ipfs/Qmeq9SXKLDnpQDXtyco36Jr6jMSAFj8PBpYBUwJprLtmvt' alt="logo" />
-                        </NavLink>
-                    </div>
-                    <div className="menuCon">
-                        <div className="rightMenu" style={styles.headerRight}>
-                            <NavLink to="/nftBalance">
-                                COLLECTIONS
-                            </NavLink>
-                            <NavLink to="/Transactions">
-                                TRANSACTIONS
-                            </NavLink>
-                            <NavLink to="/NFTMarketPlace">
-                                EXPLORE
-                            </NavLink>
 
-                            <Chains/>
-                            <NativeBalance/>
-                            <Account/>
-                            {/*<Button style={{*/}
-                            {/*    background: "#000",*/}
-                            {/*    color: "white",*/}
-                            {/*    fontSize: '12px',*/}
-                            {/*    height: '45px',*/}
-                            {/*    borderRadius: '4px',*/}
-                            {/*    boxShadow: '0 2px 3px 0 #ccc'*/}
-                            {/*}}>CREATE YOUR OWN EVENT</Button>*/}
-                        </div>
-                        <Button className="barsMenu" type="primary">
-                            <span className="barsBtn"></span>
-                        </Button>
-                    </div>
-                </nav>
-                    <Switch>
-                        <Route path="/home">
-                            <Home/>
-                        </Route>
-                        <Route path="/event-details">
-                            <EventDetails/>
-                        </Route>
-                        <Route path="/afrochella2022">
-                            <Afrochella/>
-                        </Route>
-                        <Route path="/burningman2022">
-                            <BurningMan/>
-                        </Route>
-                        <Route path="/coachella2022">
-                            <Coachella/>
-                        </Route>
-                        <Route path="/felabration2022">
-                            <Felabration/>
-                        </Route>
-                        <Route path="/lollapalooza2022">
-                            <Lollapalooza/>
-                        </Route>
-                        <Route path="/sxsw2022">
-                            <SXSW/>
-                        </Route>
-                        <Route path="/nftBalance">
-                            <NFTBalance />
-                        </Route>
 
-                        <Route path="/NFTMarketPlace">
-                            <NFTTokenIds inputValue={inputValue} setInputValue={setInputValue}/>
-                        </Route>
-                        <Route path="/Transactions">
-                            <NFTMarketTransactions/>
-                        </Route>
-                    </Switch>
-                    <Redirect to="/home"/>
+                {/*<Redirect to="/"/>*/}
             </Router>
         </>
     );
