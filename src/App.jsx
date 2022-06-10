@@ -29,6 +29,7 @@ import Coachella from "components/Coachella2022";
 import Felabration from "components/Felabration2022";
 import Lollapalooza from "components/Lollapalooza2022";
 import SXSW from "components/SXSW2022";
+import Events from "./components/Events";
 
 const {Header, Content, Sider, Footer} = Layout;
 
@@ -131,6 +132,9 @@ const App = ({isServerInfo}) => {
                                 <Route path="/">
                                     <Home/>
                                 </Route>
+                                <Route path="/events">
+                                    <Events/>
+                                </Route>
                                 <Route path="/event-details">
                                     <EventDetails/>
                                 </Route>
@@ -156,9 +160,9 @@ const App = ({isServerInfo}) => {
                                     <NFTBalance/>
                                 </Route>
 
-                                <Route path="/NFTMarketPlace">
-                                    <NFTTokenIds inputValue={inputValue} setInputValue={setInputValue}/>
-                                </Route>
+                                {/*<Route path="/NFTMarketPlace">*/}
+                                {/*    <NFTTokenIds inputValue={inputValue} setInputValue={setInputValue}/>*/}
+                                {/*</Route>*/}
                                 <Route path="/Transactions">
                                     <NFTMarketTransactions/>
                                 </Route>
@@ -242,7 +246,7 @@ const App = ({isServerInfo}) => {
                 {/*</Header>*/}
 
 
-                {/*<Redirect to="/"/>*/}
+                <Redirect to="/"/>
             </Router>
         </>
     );
