@@ -1,6 +1,6 @@
 import React, {useState} from "react";
-import {Card, Col, Row, Image, Tooltip, Modal, Input, Alert, Spin, Button} from "antd";
-import { ethers,BigNumber} from "ethers";
+import {Button, Col, Input, Row} from "antd";
+import {BigNumber, ethers} from "ethers";
 
 import ticketjson from '../Afrochella_2022.json'
 

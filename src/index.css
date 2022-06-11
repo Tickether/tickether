@@ -34,6 +34,10 @@ body {
   background-color: #fcfcfd;
 }
 
+iframe {
+  pointer-events: none;
+}
+
 ul[class],
 ol[class] {
   list-style: none;

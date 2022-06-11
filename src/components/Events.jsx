@@ -1,115 +1,85 @@
-import React, {useState} from "react";
-import {Card, Col, Row, Button, Space} from "antd";
-import {DownloadOutlined, WalletOutlined} from '@ant-design/icons';
-import {NavLink} from "react-router-dom";
-import sideImg from '../assets/background/homepagegraphic.png';
-import wallet from '../assets/background/wallet.png';
-import eventDetail from '../assets/background/eventDetails.png';
-import addNft from '../assets/background/addNft.png';
-import createEvent from '../assets/background/createEvent.png';
-
-const {Meta} = Card;
-
-const styles = {
-    NFTs: {
-        display: "flex",
-        flexWrap: "wrap",
-        WebkitBoxPack: "start",
-        justifyContent: "flex-start",
-        margin: "0 auto",
-        maxWidth: "1000px",
-        gap: "10px",
-    },
-};
-const cardStyles = {
-    imgStyle: {
-        borderRadius: '6px',
-        border: '1px solid rgb(229, 232, 235)',
-        display: 'block',
-        height: '500px',
-        margin: '0',
-        overflow: 'hidden',
-        padding: '0'
-    },
-
-};
+import React from "react";
+import {Col, Row, Select} from "antd";
 
 function Events() {
-    const styles = {
-        description: {
-            fontSize: '20px',
-            fontWeight: '300',
-            letterSpacing: '.1px',
-            lineHeight: '28px',
-            marginBottom: '40px',
-        },
-        featured: {
-            backgroundColor: '#f4f5f6',
-            paddingTop: '90px',
-            padding: '4rem 0',
-        },
-        NFTs: {
-            display: "flex",
-            flexWrap: "wrap",
-            WebkitBoxPack: "start",
-            justifyContent: "flex-start",
-            margin: "0 auto",
-            maxWidth: "1000px",
-            gap: "10px",
-        },
-        banner: {
-            display: "flex",
-            justifyContent: "space-evenly",
-            alignItems: "center",
-            margin: "0 auto",
-            width: "600px",
-            //borderRadius: "10px",
-            height: "150px",
-            marginBottom: "40px",
-            paddingBottom: "20px",
-            borderBottom: "solid 1px #e3e3e3",
-        },
-        logo: {
-            height: "115px",
-            width: "115px",
-            borderRadius: "50%",
-            // positon: "relative",
-            // marginTop: "-80px",
-            border: "solid 4px white",
-        },
-        text: {
-            color: "#041836",
-            fontSize: "27px",
-            fontWeight: "bold",
-        },
+    const {Option} = Select;
+    const onChange = (value) => {
+        console.log(`selected ${value}`);
+    };
+
+    const onSearch = (value) => {
+        console.log('search:', value);
     };
 
     return (
         <div style={{marginTop: '2rem'}}>
 
-            <div style={styles.featured}>
+            <div>
                 <div className="container">
                     <Row gutter={18}>
                         <Col span={24}>
-                            <h1 className="event-heading text-center">Featured Events</h1>
-                        </Col>
-                        <Col xs={24} xl={8}>
-                            <div className="card" style="width: 18rem;">
-                                <img src="https://gateway.pinata.cloud/ipfs/QmNdxQY91wsRrBSTonYHD1vUHkYSYYmAW3qdMJw5GpP67Q" className="card-img-top" alt="..." />
-                                    <div className="card-body">
-                                        <h5 className="card-title">Card title</h5>
-                                        <p className="card-text">Some quick example text to build on the card title and
-                                            make up the bulk of the card's content.</p>
-                                        <a href="#" className="btn btn-primary">Go somewhere</a>
-                                    </div>
-                            </div>
+                            <h2 className="event-heading text-center mb-3">Explore Events</h2>
                         </Col>
                     </Row>
+                    <Row gutter={18} className="mb-5 mt-5">
+                            <Col span={8}>
+                                <select className="form-control">
+                                    <option value="Find events near you">Find events near you</option>
+                                </select>
+                            </Col>
+                            <Col span={8}>
+                                <select className="form-control">
+                                    <option value="Find events near you">Attending</option>
+                                    <option value="10+">10+</option>
+                                    <option value="20+">20+</option>
+                                    <option value="30+">30+</option>
+                                </select>
+                            </Col>
+                        <Col span={8}>
+                            <select className="form-control">
+                                <option value="All Dates">All Dates</option>
+                                <option value="10+">10+</option>
+                                <option value="20+">20+</option>
+                                <option value="30+">30+</option>
+                            </select>
+                        </Col>
+
+                        </Row>
+                        <Row gutter={18}>
+
+                        {[1, 2, 3, 4, 5, 6].map((e, i) => {
+                            return <Col xs={24} xl={8} key={i}>
+                                <div className="card xyz" style={{borderRadius: '15px', marginBottom: '30px'}}>
+                                    <div className="img-top-div">
+                                        <img style={{borderRadius: '15px'}}
+                                             src="https://gateway.pinata.cloud/ipfs/QmNdxQY91wsRrBSTonYHD1vUHkYSYYmAW3qdMJw5GpP67Q"
+                                             className="card-img-top" alt="..."/>
+                                    </div>
+                                    <div className="FeaturedCard_eventRSVPs__oLSsB">JUN 22 | 9:30 BST</div>
+
+                                    <div className="card-body text-center" style={{marginTop: '-55px'}}>
+                                        <div
+                                            className="card-round-image-box">
+                                            <img alt="" className="Image--image"
+                                                 src="https://lh3.googleusercontent.com/fr6lqiwGJMbef3hDQ3AKOtMQSD_w41GjbBpnBln-o-2rnRUZEKx5pOmm8l87_89CkGWbMHNudwz6vhIuvLluPGqxCW_KzVYlGwkgew=s100"
+                                                 style={{objectFit: 'cover'}}/>
+                                        </div>
+                                        <h6 className="card-title mt-2 mb-1">Call Me Cute Pie</h6>
+                                        <div className="posted-by mb-3">By <a href="#">PROOF_XYZ</a></div>
+                                        <div className="text-ellipsis-2 pl-4 pr-4">
+                                            Welcome Crewmate! Board the ARK for our first Everai community Web3 & IRL
+                                            experience featuring a trilogy of announcements including a special edition
+                                            of @alanartdirector's Space Bar.
+                                            Crew mates are allowed to bring a +1
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </Col>
+                        })}
+                        </Row>
                 </div>
             </div>
-
-
-
 
 
         </div>

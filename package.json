@@ -19,7 +19,6 @@
     "dotenv": "^16.0.1",
     "ethereum-waffle": "^3.4.4",
     "ethers": "^5.6.5",
-    "framer-motion": "^6.3.3",
     "moralis": "^0.0.118",
     "react": "^17.0.2",
     "react-blockies": "^1.4.1",
